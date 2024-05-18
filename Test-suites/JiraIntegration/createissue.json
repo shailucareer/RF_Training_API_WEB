@@ -1,0 +1,30 @@
+{
+  "fields": {
+      "description": {
+      "content": [
+        {
+          "content": [
+            {
+              "text": "Order entry fails when selecting supplier.",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "doc",
+      "version": 1
+    },
+    "issuetype": {
+      "id": "10003"
+    },
+    "project": {
+      "id": "10000"
+    },
+    "reporter": {
+      "id": "601801f24e258e006946661c"
+    },
+    "summary": "Main order flow broken"
+  },
+  "update": {}
+}

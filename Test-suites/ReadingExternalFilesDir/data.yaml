@@ -1,0 +1,9 @@
+stringkey:  Hello World!
+integerKey: 42
+listKey:
+  - one
+  - two
+dictKey:
+  one: abcd
+  two: efgj
+  one two: asdf

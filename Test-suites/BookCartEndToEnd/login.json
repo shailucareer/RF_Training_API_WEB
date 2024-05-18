@@ -1,0 +1,9 @@
+{
+  "userId": 0,
+  "firstName": "string",
+  "lastName": "string",
+  "username": "appychip",
+  "password": "Test@123",
+  "gender": "string",
+  "userTypeId": 0
+}

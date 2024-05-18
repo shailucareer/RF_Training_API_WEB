@@ -1,0 +1,12 @@
+[
+  {
+    "company":"apple",
+    "employee":100000,
+    "products":["iphone","mac","ipad"]
+  },
+  {
+    "company":"samsung",
+    "employee":50000,
+    "products":["phone","laptops","tabled","TV","Fridge"]
+  }
+]
