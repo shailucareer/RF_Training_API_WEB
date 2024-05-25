@@ -4,6 +4,7 @@
 *** Test Cases ***
 Adding a tc from github
     Log    Hello from github L
+    Log    Hello from github G
 
 Adding a tc from pycharm
     Log    Hello from pycharm
