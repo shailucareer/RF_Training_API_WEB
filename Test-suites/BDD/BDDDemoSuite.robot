@@ -2,6 +2,9 @@
 
 
 *** Test Cases ***
+Adding a tc from github
+    Log    Hello from github
+
 BDD Demo 1
     Given Custom Keyword 1
 
