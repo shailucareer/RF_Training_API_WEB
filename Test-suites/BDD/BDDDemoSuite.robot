@@ -9,6 +9,10 @@ Adding a tc from github
 Adding a tc from pycharm
     Log    Hello from pycharm
 
+
+Adding a tc from pycharm 1
+    Log    Hello from pycharm
+
 BDD Demo 1
     Given Custom Keyword 1
 
