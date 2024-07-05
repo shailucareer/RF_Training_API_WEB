@@ -13,6 +13,9 @@ Loop over a list of items and log each of them
     FOR    ${item}    IN    @{ROBOTS_LIST}
         Log    ${item}
     END
+    FOR    ${item}    IN    ${ROBOTS_LIST}
+        Log    ${item}
+    END
 
 
 Loop over a list of items and log each of them but STOP at Terminator
@@ -63,6 +66,9 @@ Loop a dictionary
 Loop a range from 0 to end index
     FOR    ${index}    IN RANGE    10
         Log    ${index}    # 0-9
+        IF    ${index}==5
+             BREAK
+        END
     END
 
 Loop a range from start to end index
