@@ -13,6 +13,12 @@ Common Close Browser
 
 *** Test Cases ***
 
+Open browser using GRID
+    Open Browser    https://www.google.com      Chrome   remote_url=http://192.168.1.68:4444
+    Sleep    10s
+    Close All Browsers
+
+
 Open browser demo
     ${index}   Open Browser    https://www.google.com      HeadlessChrome   alias=A
     Log    ${index}     #1
