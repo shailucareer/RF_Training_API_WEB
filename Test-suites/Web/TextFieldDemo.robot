@@ -16,3 +16,5 @@ TC1 - Text field demo
     Textfield Value Should Be    id:fullName    HelloWorld
     Input Password    id:fullName    ABCD
     Capture Page Screenshot
+    Press Keys    id:fullName    CTRL+A+DELETE
+    Capture Page Screenshot
