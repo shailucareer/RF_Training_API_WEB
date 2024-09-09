@@ -6,6 +6,7 @@ Resource    VariablesCommon.robot
 *** Variables ***
 ${BASE_URL}     https://mybaseurl.com
 @{GLOBAL_LIST}  Red     Black   Orange  Pink
+@{NUM_LIST}  1  2   3   4   5
 &{GLOBAL_DICT}  Content-Type=text/json      Authorization=Bearer token value
 ${ENV}      DEV
 
@@ -17,6 +18,13 @@ My keyword 1
 
 
 *** Test Cases ***
+
+Getting numbers from the list
+    FOR    ${element}    IN    @{NUM_LIST}
+        ${temp}     Evaluate    ${element}+1
+        Log    ${temp}
+
+    END
 
 Precedence and Scope
     Log    ${ENV}
