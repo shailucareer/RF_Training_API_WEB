@@ -57,4 +57,7 @@ TC8 - Scroll into view demo
     Scroll Element Into View    xpath://a[contains(.,'Element Into View')]
     Sleep    2s
 
-
+## Scroll to Mid
+## window.innerHeight;
+## $x("//a[.='Timeout']")[0].getBoundingClientRect().top;
+## window.scrollTo(0,2600)

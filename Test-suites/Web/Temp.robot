@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
+Library    Collections
 
 
 *** Test Cases ***
@@ -107,6 +108,138 @@ List Demo
     ${data}     Get List Items    id:fruits     values=True
     Log    ${data}
 
+
+Dropdowns Simple and multiselect
+    Open Browser    https://letcode.in/dropdowns    chrome
+    Select From List By Index    id:fruits      1
+    Sleep    2s
+    Select From List By Label    id:fruits      Pine Apple
+    Sleep    2s
+    Select From List By Value    id:fruits      2
+    Sleep    2s
+    Select From List By Index    id:superheros      1
+    Sleep    2s
+    Select From List By Label    id:superheros      Batman
+    Sleep    2s
+    Select From List By Value    id:superheros     ta
+    Sleep    2s
+
+
+Dropdowns Get List Items
+    Open Browser    https://letcode.in/dropdowns    chrome
+    ${items}     Get List Items    id:fruits
+    Log    ${items}
+
+
+Dropdowns Get Selected List Items
+    Open Browser    https://letcode.in/dropdowns    chrome
+    Select From List By Index    id:superheros      1
+    #Sleep    2s
+    Select From List By Label    id:superheros      Batman
+    #Sleep    2s
+    Select From List By Value    id:superheros     ta
+    #Sleep    2s
+    ${items}     Get Selected List Label    id:superheros
+    Log    ${items}
+
+    ${items}     Get Selected List Value    id:superheros
+    Log    ${items}
+
+    ${items}     Get Selected List Values    id:superheros
+    Log    ${items}
+
+    ${items}     Get Selected List Labels    id:superheros
+    Log    ${items}
+    List Should Contain Value       ${items}    Aquaman
+    #List Selection Should Be    id:superheros   Aquaman (aq)
+    List Should Have No Selections    id:fruits
+
+
+Dropdowns Page should contain list
+    Open Browser    https://letcode.in/dropdowns    chrome
+    Page Should Contain List    id:superheros
+    Page Should Not Contain List    id:superheros1
+
+
+Dropdowns Select All and Deselect
+    Open Browser    https://letcode.in/dropdowns    chrome
+    Select All From List    id:superheros
+    Unselect From List By Index    id:superheros      1
+    Sleep    1s
+    UnSelect From List By Label    id:superheros      Batman
+    Sleep    1s
+    UnSelect From List By Value    id:superheros     ta
+    Sleep    1s
+    Unselect All From List    id:superheros
+    Sleep    1s
+
+Select a option using partial visible text
+    Open Browser    https://letcode.in/dropdowns    chrome
+    Click Element    id:fruits
+    Click Element    //option[contains(.,'ana')]
+    Click Element    id:fruits
+    Sleep    1s
+    Click Element    //option[contains(.,'Avenger')]
+    Sleep    1s
+
+Custom dropdowns single select
+    Open Browser    https://semantic-ui.com/modules/dropdown.html   chrome
+    Click Element    xpath:(//div[@class='ui selection dropdown'])[1]//i
+    Sleep    1s
+    Click Element    xpath://div[contains(@class,'visible')]//div[@data-value][contains(.,'Male')]
+    Sleep    2s
+
+    Click Element    xpath:(//div[@class='ui fluid selection dropdown'])[1]//i
+    Sleep    1s
+    Click Element    xpath://div[contains(@class,'visible')]//div[@data-value][contains(.,'Elliot')]
+    Sleep    2s
+    
+    Click Element    xpath:(//div[@class='ui fluid search selection dropdown']//i)[1]
+    Sleep    1s
+    Input Text    xpath:(//div[contains(@class,'ui fluid search selection dropdown')])//input[@class='search']      india
+    Sleep    1s
+    Press Keys      ${None}     RETURN      #ARROW_DOWN
+
+Dropdown multi select
+    Open Browser    https://semantic-ui.com/modules/dropdown.html   chrome
+    Click Element    xpath:(//div[@class='ui fluid multiple search selection dropdown']//i)[1]
+    Sleep    1s
+    Input Text    xpath:(//div[contains(@class,'ui fluid multiple search selection dropdown')])//input[@class='search']    India
+    Sleep    1s
+    Click Element    xpath:((//div[contains(@class,'ui fluid multiple search selection dropdown')])//div[@data-value][contains(.,'India')])[1]
+    Sleep    1s
+    Input Text    xpath:(//div[contains(@class,'ui fluid multiple search selection dropdown')])//input[@class='search']    Indian
+    Sleep    1s
+    Click Element    xpath:((//div[contains(@class,'ui fluid multiple search selection dropdown')])//div[@data-value][contains(.,'Indian')])[1]
+    Sleep    1s
+
+    # Removing all selected values
+    ${bool}     Set Variable    ${True}
+    WHILE       ${bool}      limit=NONE
+        ${elem}     Get WebElements    xpath:((//div[contains(@class,'ui fluid multiple search selection dropdown')])[1]//a//i[contains(@class,'delete')])[1]
+        ${count}     Get Length    ${elem}
+        IF    ${count}>0
+            Click Element    ${elem[0]}
+        ELSE
+            ${bool}         Set Variable    ${False}
+        END
+        Sleep    1s
+    END
+
+    Sleep    1s
+
+ITRA DEMO
+    # Lang=en;
+    # .AspNetCore.Antiforgery.KYulInBaheU=CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
+    Open Browser  https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D   browser=chrome
+    Add Cookie    Lang    en
+    Add Cookie    .AspNetCore.Antiforgery.KYulInBaheU    CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
+    Go To    https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D
+    Sleep    2s
+
+Wait Demos
+    Open Browser    https://the-internet.herokuapp.com/dynamic_controls   chrome
+    Wait For Condition    document.querySelector("form input").disabled == False
 
 *** Keywords ***
 
