@@ -19,8 +19,10 @@ Other Test Case
 This is my higher level keyword
     [Arguments]     ${user}     ${pwd}      ${email}
     Perform Login        ${user}     ${pwd}
+    Fail
     Navigate to the page
     Perform the test and verify results     ${email}
+
 
 Perform Login
     [Arguments]     ${user}     ${pwd}

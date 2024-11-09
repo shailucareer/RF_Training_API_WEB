@@ -1,6 +1,7 @@
 *** Settings ***
 Library    String
 Library    XML
+Library    Collections
 Resource    VariablesCommon.robot
 
 *** Variables ***
@@ -81,6 +82,21 @@ Dictionary Variable - Demo
     Log    ${dict_name}
     Log    ${GLOBAL_DICT}
     Log    ${GLOBAL_DICT.Authorization}
+
+    FOR    ${element}    IN    &{GLOBAL_DICT}
+        Log    ${element}
+        Log    ${element[0]}
+        Log    ${element[1]}
+    END
+
+    # Playing With Dictionary When the Keys are numbers
+    &{dict_numberAsKeys}    Create Dictionary
+    Set To Dictionary       ${dict_numberAsKeys}        1=Page1
+    ${int_var}      Evaluate    str(1+1)
+    Set To Dictionary       ${dict_numberAsKeys}        ${int_var}=Page2
+    Log    ${dict_numberAsKeys}
+    Log    ${dict_numberAsKeys['1']}
+
 
 List Variable - Demo
     ${list_name}    Create List    1    2   3   4

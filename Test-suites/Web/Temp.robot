@@ -4,6 +4,128 @@ Library    Collections
 
 
 *** Test Cases ***
+
+Get Timestamp
+    ${timestamp}        Get Time        format="hhmmss YYYYMMDD"
+    Log    ${timestamp}
+
+Session 55,56,57 Alerts
+    Open Browser        https://the-internet.herokuapp.com/javascript_alerts    chrome
+    Click Element    //button[.='Click for JS Alert']
+    Alert Should Be Present     text=I am a JS Alert       timeout=5s       action=ACCEPT
+    Alert Should Not Be Present     timeout=5s
+    Wait Until Page Contains    You successfully clicked an alert
+
+    # Handle alert
+    Click Element    //button[.='Click for JS Confirm']
+    Handle Alert    action=ACCEPT       timeout=5s
+    Alert Should Not Be Present     timeout=5s
+    Wait Until Page Contains    You clicked: Ok
+
+    Click Element    //button[.='Click for JS Confirm']
+    Handle Alert    action=DISMISS       timeout=5s
+    Alert Should Not Be Present     timeout=5s
+    Wait Until Page Contains    You clicked: Cancel
+
+    Click Element    //button[.='Click for JS Confirm']
+    Handle Alert    action=LEAVE       timeout=5s
+    Alert Should Be Present     timeout=5s
+    Wait Until Page Contains    You clicked: Ok
+
+    # Input text into alert
+    Click Element    //button[.='Click for JS Prompt']
+    Input Text Into Alert    Hello World
+    Alert Should Not Be Present     timeout=5s
+    Wait Until Page Contains    You entered: Hello World
+
+
+    Go To    https://letcode.in/waits
+    Click Element    id:accept
+    Alert Should Be Present     text=Finally I'm here, just to say Hi :)       timeout=10s       action=ACCEPT
+    Alert Should Not Be Present     timeout=5s
+    Sleep    5s
+
+Session 57, Custom Alerts
+    Open Browser    https://codepen.io/m4rc1nn/pen/NWwdvEB        chrome
+    Select Frame    id:result
+    Click Element    //button[contains(.,'Custom Alert With Heading')]
+    Wait Until Page Contains    This is a custom alert with heading.
+    Sleep    1s
+    Click Element    //button[.='OK']
+    Wait Until Element Is Not Visible    //button[.='OK']
+    
+Session 57, Custom Toasters
+    Open Browser    https://getbootstrap.com/docs/5.0/components/toasts/        chrome
+    Maximize Browser Window
+    Wait Until Element Is Not Visible    (//div[@class='toast-body'][contains(.,'Hello, world! This is a toast message.')])[2]
+    Scroll Element Into View    id:translucent
+    Click Element    id:liveToastBtn
+    Wait Until Element Is Visible    (//div[@class='toast-body'][contains(.,'Hello, world! This is a toast message.')])[2]
+    Click Element    //button[@aria-label='Close']
+    Wait Until Element Is Not Visible    (//div[@class='toast-body'][contains(.,'Hello, world! This is a toast message.')])[2]
+
+Other Keywords of Sel Lib
+    Open Browser        https://letcode.in/forms    chrome
+    Maximize Browser Window
+    Register Keyword To Run On Failure      Custom Failure KW
+    Submit Form
+    Cover Element    link:Watch tutorial
+    Assign Id To Element    link:Sign up    MyId
+    #Element Should Be Visible      abcd
+    Add Location Strategy    my    Custom locator strategy
+    Input Text    my:firstname    Hello World
+    Set Screenshot Directory    ${EXECDIR}/screenshots
+    ${cookies}      Get Cookies
+    Log    ${cookies}
+    ${cookie}      Get Cookie    __gads
+    Log    ${cookie}
+    Log    ${cookie.name}
+    Element Should Be Visible      abcd
+
+
+ITRA DEMO
+    # Lang=en;
+    # .AspNetCore.Antiforgery.KYulInBaheU=CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
+    Open Browser  https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D   browser=chrome
+    Add Cookie    Lang    en
+    Add Cookie    .AspNetCore.Antiforgery.KYulInBaheU    CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
+    Go To    https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D
+    Sleep    2s
+
+
+
+Dummy test
+    Log     ${EXECDIR}
+
+
+Implicit and Explicit Wait Demo
+    Open Browser        https://the-internet.herokuapp.com/dynamic_loading/1    chrome
+    Set Selenium Implicit Wait    5s
+    Wait Until Element Is Visible    xpath://button[.='Starts']     timeout=15s
+    Click Element    xpath://button[.='Starts']
+
+Wait For Condition Demo
+    Open Browser    https://the-internet.herokuapp.com/dynamic_loading/1   chrome
+    Wait For Condition    return document.querySelector("#finish").style.display == 'none'      timeout=10s
+    Click Element    xpath://button[.='Start']
+    Wait For Condition    return document.querySelector("#finish").style.display == ''      timeout=10s
+
+Wait For Expected Condition Demo
+    Open Browser    https://the-internet.herokuapp.com/dynamic_loading/1   headlesschrome
+    ${helloElem}    Evaluate    ("id","finish")
+    Wait For Expected Condition     element_attribute_to_include    ${helloElem}        id
+
+Wait Until Element Contains Demo
+    Open Browser    https://the-internet.herokuapp.com/dynamic_loading/1   headlesschrome
+    Click Element    xpath://button[.='Start']
+    Wait Until Element Contains     id:finish       Hello
+
+Set Selenium Timeot Demo
+    Open Browser    https://the-internet.herokuapp.com/dynamic_loading/1   headlesschrome
+    Set Selenium Timeout    20s
+    Click Element    xpath://button[.='Start']
+    Wait Until Element Contains     id:finish       Hello1  timeout=2s
+
 Element Current State
     Open Browser    https://www.google.com  chrome  alias=A
     ${at}   Get Dom Attribute    q    role
@@ -228,20 +350,15 @@ Dropdown multi select
 
     Sleep    1s
 
-ITRA DEMO
-    # Lang=en;
-    # .AspNetCore.Antiforgery.KYulInBaheU=CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
-    Open Browser  https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D   browser=chrome
-    Add Cookie    Lang    en
-    Add Cookie    .AspNetCore.Antiforgery.KYulInBaheU    CfDJ8BAkgdDaPARDugoSWjfo-Pyni5rnDCqZEJynP33M_0ULv-50NkQrrIv2AhoH6FZN-hFm59KvouLf-QrN8zbni0vhwz_sf7z80NYCFVFjMjUhymHFtxMirN-hMpIwAy2TtUzaHMEdn7JM0W6PQwkRVTY
-    Go To    https://itra.run/api/RunnerSpace/GetRunnerSpace?runnerString=CzHQn5MLDMpDxm2kBIrGSA%3D%3D
-    Sleep    2s
-
-Wait Demos
-    Open Browser    https://the-internet.herokuapp.com/dynamic_controls   chrome
-    Wait For Condition    document.querySelector("form input").disabled == False
-
 *** Keywords ***
+Custom locator strategy
+    [Arguments]	    ${browser}	    ${locator}	    ${tag}	    ${constraints}
+    ${element}=	Execute Javascript	return window.document.getElementById('${locator}');
+    [Return]	${element}
+
+Custom Failure KW
+    Log    Hello World
+    Capture Page Screenshot
 
 Get Table Cell Child Element
     [Arguments]         ${TableLocatorXpath}            ${RowNumber}        ${ColNumber}            ${Tag}        ${ElementPosition}

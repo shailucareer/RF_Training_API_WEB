@@ -57,6 +57,15 @@ TC8 - Scroll into view demo
     Scroll Element Into View    xpath://a[contains(.,'Element Into View')]
     Sleep    2s
 
+
+TC9 - Scroll to Mid Demo
+    Open Browser    https://letcode.in/test    chrome
+    ${elem}     Get WebElement    link:Timeout
+    Capture Page Screenshot
+    Execute Javascript      ARGUMENTS   ${elem}     JAVASCRIPT  var innerHeight = window.innerHeight;
+    ...     var pos = arguments[0].getBoundingClientRect().top;
+    ...     window.scrollTo(0,pos-innerHeight/2);
+    Capture Page Screenshot
 ## Scroll to Mid
 ## window.innerHeight;
 ## $x("//a[.='Timeout']")[0].getBoundingClientRect().top;
