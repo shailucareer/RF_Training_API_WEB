@@ -64,7 +64,7 @@ Session 57, Custom Toasters
     Click Element    //button[@aria-label='Close']
     Wait Until Element Is Not Visible    (//div[@class='toast-body'][contains(.,'Hello, world! This is a toast message.')])[2]
 
-Other Keywords of Sel Lib
+Session 58 Other Keywords of Sel Lib
     Open Browser        https://letcode.in/forms    chrome
     Maximize Browser Window
     Register Keyword To Run On Failure      Custom Failure KW
