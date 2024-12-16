@@ -12,20 +12,20 @@ Test Setup      Launch browser bdd
 Test Teardown      Close browser bdd
 
 *** Test Cases ***
-Verify valid login works0
+Verify valid login works1
     Given Application is opened and Login page is displayed
     When I enter username "testteam.fullstack@gmail.com" and password "Test@123", try to login
     Then I should see home page, and logout button
 
 
-Verify invalid login0
+Verify invalid login1
     [Template]          Verify invalid login - bdd template
     testteam.fullstack@gmail.com        ${EMPTY}
     testteam.fullstack@gmail.com        Test@1234
     testteam.fullstack@gmail.comm        Test@123
 
 
-Verify valid login for shailendra customer0
+Verify valid login for shailendra customer1
     Given Application is opened and Login page is displayed
     When I enter username "testteam.fullstack@gmail.com" and password "Test@123", try to login
     Then I should see home page, and logout button
